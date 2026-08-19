@@ -1,0 +1,20 @@
+# =============================================================
+# 段功能：后端 Dockerfile（M5 生产部署）
+# 说明：FastAPI 应用容器。构建镜像后启动 uvicorn。
+# =============================================================
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+# 安装依赖（先装依赖以利用 Docker 层缓存）
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 复制应用代码
+COPY . .
+
+# 生产用 uvicorn 单进程 + gunicorn 可选；这里用 uvicorn
+EXPOSE 8000
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

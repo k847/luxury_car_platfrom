@@ -1,0 +1,11 @@
+{
+  // 段功能：Node 端 TS 配置（供 Vite 配置使用）
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["vite.config.ts"]
+}

@@ -1,0 +1,53 @@
+# =============================================================
+# 段功能：M5 Docker Compose（D2 分离式，dev/staging，对齐 §13.1）
+# 说明：一键起 backend + mysql + redis + nginx。
+#   前端静态由构建产物挂载到 nginx 容器。
+#   用法：docker compose up -d
+# =============================================================
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../deploy/Dockerfile.backend
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=luxury_car
+      - REDIS_URL=redis://redis:6379/0
+      - JWT_SECRET=change-me-in-prod
+      - CORS_ORIGINS=http://localhost
+      - ENV=staging
+    depends_on:
+      - mysql
+      - redis
+    ports:
+      - "8000:8000"
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=luxury_car
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  redis:
+    image: redis:7
+
+  nginx:
+    image: nginx:1.25
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./frontend/dist:/usr/share/nginx/html
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data: {}

@@ -1,0 +1,26 @@
+# =============================================================
+# 段功能：后端 Python 依赖清单（M1–M5）
+# 说明：本文件锁定后端运行所需的第三方库版本，便于可复现安装。
+#       - FastAPI：Web 框架，提供路由 / 依赖注入 / 自动 OpenAPI 文档
+#       - Uvicorn：ASGI 服务器，用于本地与生产运行
+#       - SQLAlchemy 2.x：ORM，负责与 MySQL 交互（映射到 29 张表）
+#       - PyMySQL：MySQL 驱动（纯 Python，无需编译）
+#       - Alembic：数据库迁移工具，M1 用于初始化建表
+#       - Pydantic v2 + pydantic-settings：请求/响应数据校验与配置读取
+#       - bcrypt：密码加盐哈希（M4 起直接使用 bcrypt 库，弃用 passlib）
+#       - PyJWT：签发 / 校验 JWT（登录态）
+#       - python-multipart：支持表单登录（OAuth2 密码模式需要）
+#       - redis：限流 / refresh token 存储（生产用，M1 先预留）
+# =============================================================
+
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+sqlalchemy>=2.0.36
+PyMySQL==1.1.0
+alembic==1.13.1
+pydantic>=2.7,<3
+pydantic-settings>=2.3.4
+bcrypt>=4.0.0
+PyJWT==2.8.0
+python-multipart==0.0.9
+redis==5.0.4

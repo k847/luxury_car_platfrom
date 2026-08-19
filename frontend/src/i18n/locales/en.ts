@@ -1,0 +1,143 @@
+// 段功能：英文文案资源（M1 基建 + M2 扩展）
+// 说明：key 与 zh.ts 对应，供 i18next 按语言切换。
+const en = {
+  nav: {
+    home: "Home",
+    models: "Models",
+    news: "News",
+  },
+  model: {
+    detail: "Model Detail",
+  },
+  news: {
+    detail: "News Detail",
+  },
+  common: {
+    comingSoon: "Page under construction (M1 placeholder)",
+    loading: "Loading…",
+    error: "Failed to load, please retry",
+  },
+  brand: {
+    name: "REGALIA MOTORS",
+  },
+  // Home
+  home: {
+    heroTitle: "Enjoy Luxury Driving",
+    heroSubtitle: "Top brands aggregated, one-stop car selection",
+    explore: "Explore Now",
+    brands: "Brands",
+    recommended: "Recommended",
+    latestNews: "Latest News",
+    viewAll: "View All",
+  },
+  // Model list
+  models: {
+    title: "Models",
+    filter: "Filter",
+    all: "All",
+    segment: "Segment",
+    fuel: "Fuel",
+    price: "Price",
+    sort: "Sort",
+    sortDefault: "Default",
+    sortPrice: "Price ↑",
+    sortLaunch: "Newest",
+    sortHeat: "Popular",
+    results: "{{count}} models",
+    noResult: "No models match your filters",
+    guidePrice: "Guide Price",
+  },
+  // Model detail
+  modelDetail: {
+    gallery: "Gallery",
+    trims: "Trims",
+    colors: "Colors",
+    dealers: "On-sale Dealers",
+    finance: "Finance",
+    financeCta: "Estimate Monthly",
+    body: "Dimensions",
+    length: "Length",
+    width: "Width",
+    height: "Height",
+    wheelbase: "Wheelbase",
+    trunk: "Trunk",
+    back: "Back to list",
+    notFound: "Model not found or off-shelf",
+    actions: "Select & Consult",
+    configure: "Configure Now",
+  },
+  // News
+  articles: {
+    title: "News",
+    noResult: "No news yet",
+    back: "Back to list",
+    notFound: "News not found",
+  },
+  // M3 Configurator
+  configurator: {
+    title: "Configurator",
+    start: "Start Configuring",
+    basePrice: "Base Price",
+    total: "Estimated Total",
+    stock: "Stock",
+    stockInStock: "In Stock",
+    stockPreorder: "Pre-order",
+    stockEol: "EOL",
+    leadTime: "Est. Delivery",
+    days: "days",
+    defaultTag: "Default",
+    next: "Next",
+    prev: "Back",
+    finish: "Finish",
+    toLead: "Submit Test-drive Lead",
+    summary: "Configuration Summary",
+    requiredHint: "Please select required options first",
+  },
+  // M3 Compare
+  compare: {
+    title: "Compare Models",
+    empty: "Select at least 2 models to compare",
+    addHint: "Check “Compare” on the model list then view here",
+    clear: "Clear",
+    guidePrice: "Guide Price",
+    fuel: "Fuel",
+    segment: "Segment",
+    body: "Dimensions",
+    power: "Power",
+    trims: "Trims",
+    close: "Close",
+  },
+  // M3 Finance Calculator
+  finance: {
+    title: "Finance Calculator",
+    term: "Term (months)",
+    downPayment: "Down Payment",
+    monthly: "Est. Monthly",
+    totalInterest: "Total Interest",
+    calculate: "Calculate",
+    hint: "Equal-installment estimate; actual plan may vary",
+    product: "Plan",
+  },
+  // M3 Leads (test-drive / inquiry)
+  lead: {
+    testDriveTitle: "Book a Test Drive",
+    inquiryTitle: "Inquiry / Quote",
+    name: "Name",
+    phone: "Phone",
+    city: "City",
+    model: "Model of Interest",
+    preferredTime: "Preferred Time",
+    remark: "Remark",
+    intent: "Inquiry Type",
+    intentTradeIn: "Trade-in",
+    intentFinance: "Finance",
+    intentStock: "In-stock",
+    submit: "Submit",
+    success: "Submitted. Our consultant will contact you soon.",
+    error: "Submission failed, please retry",
+    required: "Name and phone are required",
+    invalidPhone: "Invalid phone number",
+  },
+};
+
+export default en;
