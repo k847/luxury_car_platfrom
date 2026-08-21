@@ -32,12 +32,21 @@ export const tokens = {
     md: "8px",
     lg: "16px",
   },
-  // 字体
+  // 字体（保时捷式极简奢华：大标题 + 细字距体系）
   font: {
     base: "14px",
     lg: "18px",
     xl: "28px",
-    family: "'PingFang SC','Microsoft YaHei',system-ui,sans-serif",
+    hero: "56px", // 首页主视觉大标题
+    heroLg: "72px", // 桌面端更大字号
+    display: "40px", // 区块大标题
+    family: "'PingFang SC','Helvetica Neue','Microsoft YaHei',system-ui,sans-serif",
+    weightLight: 300,
+    weightRegular: 400,
+    weightMedium: 500,
+    weightSemi: 600,
+    trackingWide: "0.12em", // 全大写类标题字距
+    trackingNormal: "0.02em",
   },
 } as const;
 

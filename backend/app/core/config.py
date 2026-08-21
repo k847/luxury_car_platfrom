@@ -39,6 +39,10 @@ class Settings(BaseSettings):
     ENV: str = "dev"                  # dev / staging / prod
     API_PREFIX: str = "/api"          # 全局接口前缀
 
+    # ---------- 百度地图（经销商门店地图联动，M6 新增）----------
+    BAIDU_MAP_KEY: str = ""           # 百度地图开放平台 AK（lbsyun.baidu.com 申请），
+                                      # 用于 /api/v1/map/geocode 地理编码代理；留空表示未接入
+
     @property
     def database_url(self) -> str:
         """

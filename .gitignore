@@ -42,3 +42,9 @@ dist-ssr/
 .DS_Store
 Thumbs.db
 *.log
+
+# ============ 本地数据 / 构建缓存（勿提交） ============
+# 本地 SQLite 演示数据库（演示/开发用，生产用 MySQL，不入库）
+*.db
+# TypeScript 增量编译缓存（构建过程生成，非源码）
+*.tsbuildinfo

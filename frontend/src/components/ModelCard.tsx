@@ -1,13 +1,14 @@
 // =============================================================
-// 段功能：车型卡片组件（M2 列表/首页推荐）
+// 段功能：车型卡片组件（M2 列表/首页推荐；M6 升级 hover 上浮+图片懒加载）
 // 说明：展示封面 + 车型名 + 品牌/车系 + 指导价；点击进入车型详情。
-//       无封面时显示品牌占位图块。
+//       封面使用 LazyImage（懒加载 + 滚动显现），hover 上浮与图片缩放。
 // =============================================================
 
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import type { ModelListItem } from "../api/public";
 import { formatPrice } from "../utils/format";
+import LazyImage from "./LazyImage";
 
 export default function ModelCard({
   model,
@@ -24,7 +25,7 @@ export default function ModelCard({
       <Link className="model-card" to={`/models/${model.id}`}>
         <div className="model-card__media">
           {model.cover_image ? (
-            <img src={model.cover_image} alt={model.model_name || ""} />
+            <LazyImage src={model.cover_image} alt={model.model_name || ""} reveal />
           ) : (
             <div className="model-card__ph">REGALIA</div>
           )}

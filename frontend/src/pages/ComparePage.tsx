@@ -10,6 +10,14 @@ import { useTranslation } from "react-i18next";
 import { getCompare, type CompareItem } from "../api/public";
 import { formatPrice } from "../utils/format";
 
+// 能源类型中文映射（对比表友好展示）
+function fuelZh(fuel: string | null): string {
+  const map: Record<string, string> = {
+    ev: "纯电", gasoline: "燃油", hybrid: "混动", phev: "插混", diesel: "柴油",
+  };
+  return fuel ? map[fuel] || fuel : "—";
+}
+
 export default function ComparePage() {
   const { t } = useTranslation();
   const [params] = useSearchParams();
@@ -54,15 +62,17 @@ export default function ComparePage() {
   const rows: Array<{ label: string; get: (c: CompareItem) => string }> = [
     { label: t("configurator.title"), get: (c) => c.model_name || "—" },
     { label: t("compare.guidePrice"), get: (c) => (c.guide_price != null ? formatPrice(c.guide_price) : "—") },
-    { label: t("compare.fuel"), get: (c) => c.fuel_type || "—" },
+    { label: t("compare.fuel"), get: (c) => fuelZh(c.fuel_type) },
     { label: t("compare.segment"), get: (c) => c.segment || "—" },
     {
       label: t("compare.body"),
       get: (c) =>
         c.body
-          ? `${c.body.length ?? "—"}×${c.body.width ?? "—"}×${c.body.height ?? "—"} (${c.body.wheelbase ?? "—"})`
+          ? `${c.body.length ?? "—"}×${c.body.width ?? "—"}×${c.body.height ?? "—"}`
           : "—",
     },
+    { label: t("modelDetail.wheelbase"), get: (c) => (c.body?.wheelbase != null ? String(c.body.wheelbase) : "—") },
+    { label: t("modelDetail.trunk"), get: (c) => (c.body?.trunk != null ? `${c.body.trunk}L` : "—") },
     { label: t("compare.power"), get: (c) => c.power || "—" },
     { label: t("compare.trims"), get: (c) => String(c.trims_count) },
   ];

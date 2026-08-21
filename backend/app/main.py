@@ -17,6 +17,7 @@ from app.api.routes.auth import router as auth_router
 from app.api.routes.public import router as public_router
 from app.api.routes.public import compare_router as compare_router
 from app.api.routes.admin import router as admin_router
+from app.api.routes.map import router as map_router
 from app.core.config import settings
 from app.core.database import get_db
 from app.middleware.audit import AuditMiddleware
@@ -92,6 +93,9 @@ app.include_router(public_router)
 
 # 7) 挂载 M4 后台管理路由（前缀 /api/v1/admin，对齐 §8，require_permission 门控）
 app.include_router(admin_router)
+
+# 8) 挂载百度地图路由（前缀 /api/v1/map，经销商门店地图联动）
+app.include_router(map_router)
 
 
 @app.get("/", tags=["system"])

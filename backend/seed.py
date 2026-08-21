@@ -22,15 +22,17 @@ from app.models import (
 )
 
 
-def seed():
+def seed(db=None):
     """
     写入初始超级管理员与权限数据。
     先建表（若尚未建），再幂等插入：已存在则跳过。
+    可选参数 db：传入已绑定会话（如 SQLite 演示库）；默认使用全局 MySQL 引擎。
     """
-    # 确保表存在（相当于一次建表；生产用 alembic 迁移）
-    Base.metadata.create_all(bind=engine)
-
-    db = SessionLocal()
+    # 自建会话才负责建表与关闭；外部传入的会话（演示库）由调用方管理
+    own = db is None
+    if own:
+        Base.metadata.create_all(bind=engine)
+        db = SessionLocal()
     try:
         # --- 权限点：覆盖《开发技术文档》附录 C 的角色→权限矩阵所需编码 ---
         perm_codes = [
@@ -83,17 +85,20 @@ def seed():
         db.commit()
         print("种子数据写入完成：超级管理员 admin / admin123")
     finally:
-        db.close()
+        if own:
+            db.close()
 
 
-def seed_demo_data():
+def seed_demo_data(db=None):
     """
     段功能：M5 双语演示数据（供前台/后台联调）。
     说明：幂等插入 1 品牌 + 1 车系 + 1 车型（含配置器/配置版本）+ 1 资讯 + 1 Banner
           + 1 经销商 + 金融参数 + 1 条演示试驾线索，全部中英双语。
-    用法：python seed.py demo
+    用法：python seed.py demo（可传 db 复用外部会话，如 SQLite 演示库）
     """
-    db = SessionLocal()
+    own = db is None
+    if own:
+        db = SessionLocal()
     try:
         if db.query(Brand).first():
             print("已存在主数据，跳过演示数据写入")
@@ -162,7 +167,8 @@ def seed_demo_data():
         db.commit()
         print("双语演示数据写入完成")
     finally:
-        db.close()
+        if own:
+            db.close()
 
 
 if __name__ == "__main__":

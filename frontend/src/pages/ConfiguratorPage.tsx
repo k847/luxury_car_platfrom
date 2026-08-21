@@ -174,6 +174,10 @@ export default function ConfiguratorPage() {
   const current = steps[Math.min(step, steps.length - 1)];
   const isLast = step >= steps.length - 1;
 
+  // M6：所选颜色 swatch（供车身剪影实时着色）
+  const colorOpt = groups.find((g) => g.group_code === "color")?.options.find((o) => o.id === selections.color);
+  const selectedSwatch = colorOpt?.swatch || null;
+
   return (
     <div className="config-page">
       <Link to={`/models/${modelId}`} className="btn-ghost">
@@ -242,8 +246,21 @@ export default function ConfiguratorPage() {
           </div>
         </section>
 
-        {/* 右：实时摘要 + 金融计算器 */}
+        {/* 右：实时摘要 + 车身预览 + 金融计算器 */}
         <aside className="config-summary">
+          {/* M6：颜色实时预览（车身剪影随所选颜色着色） */}
+          <div className="preview-car">
+            <svg viewBox="0 0 420 120" role="img" aria-label="车身颜色预览">
+              <path
+                d="M20 88 L52 62 Q56 46 76 44 L128 34 Q140 18 168 18 L318 20 Q348 24 356 44 L398 60 L402 84 L20 88 Z"
+                fill={selectedSwatch || "#1a1a1e"}
+                stroke="#c2a36b"
+                strokeWidth="1"
+              />
+              <circle cx="110" cy="90" r="14" fill="#0e0e10" stroke="#9a9aa0" />
+              <circle cx="310" cy="90" r="14" fill="#0e0e10" stroke="#9a9aa0" />
+            </svg>
+          </div>
           <div className="summary-card">
             <div className="summary-row">
               <span>{t("configurator.basePrice")}</span>
